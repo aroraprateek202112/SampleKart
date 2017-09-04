@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.prateek.samplekart.R;
+import com.prateek.samplekart.adapters.viewholders.HomePageCategoryItemViewHolder;
+import com.prateek.samplekart.adapters.viewholders.HomePageGenericRecyclerViewHolder;
+import com.prateek.samplekart.adapters.viewholders.HomePagePopularProductListViewHolder;
 import com.prateek.samplekart.interfaces.IModel;
 
 import java.util.List;
@@ -15,7 +18,7 @@ import java.util.List;
  * Created by Prateek on 03-09-2017.
  */
 
-public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<HomePageRecyclerViewAdapter.HomePageRecyclerViewHolder> {
+public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<HomePageGenericRecyclerViewHolder> {
 
     private final Context mContext;
     private final LayoutInflater mInflater;
@@ -36,14 +39,17 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<HomePageRe
     }
 
     @Override
-    public HomePageRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        HomePageRecyclerViewHolder holder = null;
+    public HomePageGenericRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        HomePageGenericRecyclerViewHolder holder = null;
         View view = null;
         switch (viewType) {
-            case IModel.MODEL_TYPE_CATEGORY :
+            case IModel.MODEL_TYPE_CATEGORY:
                 view = mInflater.inflate(R.layout.home_page_category_item_layout, parent, false);
-                holder = new HomePageRecyclerViewHolder(view);
+                holder = new HomePageCategoryItemViewHolder(view);
                 break;
+            case IModel.MODEL_TYPE_POPULAR_PRODUCT:
+                view = mInflater.inflate(R.layout.home_page_popular_product_list_layout, parent, false);
+                holder = new HomePagePopularProductListViewHolder(view);
             default:
                 break;
         }
@@ -51,13 +57,13 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<HomePageRe
     }
 
     @Override
-    public void onBindViewHolder(HomePageRecyclerViewHolder holder, int position) {
-
+    public void onBindViewHolder(HomePageGenericRecyclerViewHolder holder, int position) {
+        holder.bindValues(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mList != null ? mList.size() : 0;
     }
 
     public void updateData(List<IModel> list) {
@@ -65,10 +71,4 @@ public class HomePageRecyclerViewAdapter extends RecyclerView.Adapter<HomePageRe
         notifyDataSetChanged();
     }
 
-    public static class HomePageRecyclerViewHolder extends RecyclerView.ViewHolder {
-
-        public HomePageRecyclerViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
 }

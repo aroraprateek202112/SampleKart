@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Prateek on 03-09-2017.
  */
 
-public class PopularProductModel extends BaseModel implements IModel {
+public class PopularProductModel extends BaseModel {
 
     private List<ItemModel> itemList;
 

@@ -18,7 +18,9 @@ import android.view.MenuItem;
 import com.prateek.samplekart.R;
 import com.prateek.samplekart.adapters.HomePageRecyclerViewAdapter;
 import com.prateek.samplekart.interfaces.IModel;
+import com.prateek.samplekart.model.CategoryModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
@@ -52,6 +54,19 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        createSampleListAndAddToRecyclerView();
+    }
+
+    private void createSampleListAndAddToRecyclerView() {
+        List<IModel> list = new ArrayList<>();
+        list.add(new CategoryModel("Electrical Items", 0));
+        list.add(new CategoryModel("Garment Items", 0));
+        list.add(new CategoryModel("Vegetable Items", 0));
+        list.add(new CategoryModel("Electrical Items", 0));
+        list.add(new CategoryModel("Electrical Items", 0));
+
+        updateData(list);
     }
 
     public void updateData(List<IModel> list) {

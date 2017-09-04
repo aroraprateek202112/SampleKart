@@ -6,7 +6,7 @@ import com.prateek.samplekart.interfaces.IModel;
  * Created by Prateek on 03-09-2017.
  */
 
-public class ItemModel extends BaseModel implements IModel {
+public class ItemModel extends BaseModel {
 
     private int categoryId;
 
